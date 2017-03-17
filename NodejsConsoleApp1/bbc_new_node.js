@@ -8,7 +8,7 @@ var api_dns = "https://newsapi.org/v1/articles?";
 
 var address = "https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=";
 
-bbc_news.prototype.GetNews = function (src, srt) {
+bbc_news.prototype.GetNews = function (src, srt, callback) {
     var response = "";
     if (!src) {
         src = source;
@@ -23,16 +23,14 @@ bbc_news.prototype.GetNews = function (src, srt) {
 
         res.on('data', function (chunk) {
             body += chunk;
-            console.log("Error, what kind of errors shall I handle", body);
         });
 
         res.on('end', function () {
             response = JSON.parse(body);
-            console.log("Error, what kind of errors shall I handle", response);
-            return response;
+            return callback(null, response);
         });
     }).on('error', function (e) {
-        console.log("Error, what kind of errors shall I handle", response);
+        return callback(e)
     });
 
 }

@@ -59,44 +59,12 @@ var optionsBBC = {
     path: '/v1/articles?source=bbc-news&sortBy=top&apiKey=61af4ac7a45649a48cc04fa3174927b0'
 }
 
-var news_feed = news.GetNews("bbc-news","top");
-console.log("return " +news_feed);
-/*var url = 'https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=61af4ac7a45649a48cc04fa3174927b0';
+var news_feed = news.GetNews("bbc-news","top", (err, response) => {
+  if (err) {
+    console.log("Error!", err)
+  }
+  console.log(response)
+  console.log('end')
+});
 
-http.get(url, function (res) {
-    var body = '';
-
-    res.on('data', function (chunk) {
-        body += chunk;
-    });
-
-    res.on('end', function () {
-        var response = JSON.parse(body);
-        console.log("Got a response: ", response);
-    });
-}).on('error', function (e) {
-    console.log("Got an error: ", e);
-});*/
-/*var req = http.request(optionsBBC, function (res) {
-    console.log('Status: ' );
-    console.log('Status: ' + res.statusCode);
-    console.log('Headers: ' + JSON.stringify(res.headers));
-    res.setEncoding('utf8');
-    res.on('data', function (body) {
-        console.log('Body: ' + body);
-    });
-    res.on('end', function () {
-        console.log("Saying stuff");
-        //var speechOutput = "Andrea es la mejor del mundo";
-        //var cardTitle = "Your Fact";
-        //response.tellWithCard(speechOutput, cardTitle, speechOutput);
-        //context.done(body);
-    });
-    res.on('error', function (e) {
-        context.fail('error:' + e.message);
-    });
-});*/
-
-//req.write(post_data);
-//req.end();
-// Create speech output
+console.log("Esto se ejecuta antes que lo de dentro del callback pq el callback es asincrono y necesita bajar todos los datos")
